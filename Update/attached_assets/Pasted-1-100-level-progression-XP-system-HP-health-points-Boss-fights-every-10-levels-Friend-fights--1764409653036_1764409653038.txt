@@ -1,0 +1,285 @@
+1–100 level progression
+
+XP system
+
+HP (health points)
+
+Boss fights every 10 levels
+
+Friend fights (multiplayer challenges)
+
+Lessons + quizzes with adaptive difficulty
+
+Attention detection module
+
+Real-time collaboration room (whiteboard + chat)
+
+Teacher analytics dashboard
+
+Firebase Auth + Firestore Database
+
+Socket.io real-time backend
+
+Generate clean, readable code with a modular file structure.
+
+🟦 PART 1: Generate Flutter App (Frontend)
+
+Create these files and folders in the lib/ directory:
+
+lib/
+  main.dart
+  router.dart
+  features/
+    auth/login_page.dart
+    auth/signup_page.dart
+    dashboard/student_dashboard.dart
+    dashboard/teacher_dashboard.dart
+    lessons/lesson_page.dart
+    lessons/quiz_page.dart
+    levels/level_system.dart
+    levels/boss_fight_page.dart
+    levels/friend_fight_page.dart
+    attention/attention_tracker.dart
+    collab/collab_room.dart
+    collab/whiteboard_canvas.dart
+    collab/chat_box.dart
+  models/user_model.dart
+  models/lesson_model.dart
+  services/firebase_service.dart
+  services/socket_service.dart
+
+Flutter Requirements
+
+Riverpod or Provider state management
+
+Material 3 UI
+
+Clean architecture
+
+Reusable widgets
+
+Responsive layout
+
+Firebase Authentication
+
+Firebase Firestore
+
+Socket.io client
+
+Whiteboard (Canvas) widget
+
+Boss fight + friend fight screens with HP + XP
+
+🟥 PART 2: Generate Backend (Node.js)
+
+Create a separate folder /backend with:
+
+backend/
+  server.js
+  sockets/collabSocket.js
+  routes/userRoutes.js
+  routes/lessonRoutes.js
+  controllers/userController.js
+  controllers/lessonController.js
+  models/User.js
+  models/Lesson.js
+  models/QuizResult.js
+  models/BossFight.js
+  config/db.js
+  package.json
+
+Backend Requirements:
+
+Express.js
+
+Socket.io
+
+MongoDB (Mongoose)
+
+CORS enabled
+
+Endpoints:
+
+/api/auth/login
+
+/api/auth/signup
+
+/api/lessons
+
+/api/quiz/submit
+
+/api/levels/progress
+
+/api/bossfight/start
+
+/api/bossfight/finish
+
+Socket rooms for friend fights + collaboration
+
+Whiteboard sync events
+
+Chat events
+
+XP/HP updates
+
+🟩 PART 3: Tower of God Style Level System
+
+Implement:
+
+Levels: 1 → 100
+
+100 XP = 1 Level
+
+XP required increases by 10% every 10 levels
+
+Boss Fights at:
+
+10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+
+Boss Fight =
+
+Harder quiz (5–8 questions)
+
+Timer
+
+HP loss on wrong answers
+
+XP boost on win
+
+Friend Fights:
+
+Real-time collaborative challenge via Socket.io
+
+Shared HP pool
+
+Shared timer
+
+Shared XP reward
+
+HP System:
+
+Start HP = 100
+
+Lose HP:
+
+Wrong answers
+
+Low attention detection
+
+Failure in boss fight
+
+Gain HP:
+
+Win boss fight
+
+Daily streak
+
+Extra tasks (AI-generated micro-tasks)
+
+🟧 PART 4: Attention Detection Module
+
+Create a Flutter widget:
+
+Uses camera
+
+Detects:
+
+Face presence
+
+Eye openness
+
+Looking away
+
+If low attention:
+
+Show popup
+
+Reduce HP
+
+Slow down difficulty
+
+If too difficult, simulate with random attention drops for MVP.
+
+🟨 PART 5: Collaboration Room
+
+Create:
+
+Whiteboard Features:
+
+Drawing
+
+Erasing
+
+Colors
+
+Real-time sync via Socket.io
+
+Chat:
+
+Live chat feed
+
+Typing indicator
+
+Send/receive messages
+
+Group XP Meter:
+
+Progress bar
+
+Shared XP
+
+🟪 PART 6: Teacher Dashboard
+
+Teacher sees:
+
+All students
+
+Levels
+
+XP
+
+HP
+
+Average attention
+
+Average quiz accuracy
+
+Weak concepts
+
+Charts using fl_chart
+
+📌 PART 7 — Final Deliverables
+
+Generate:
+
+✔ A complete Flutter project
+✔ A complete Node.js backend
+✔ All required files
+✔ Dummy data for lessons
+✔ Working routing
+✔ MVP-level UI
+✔ Functional boss fight engine
+✔ Functional quiz engine
+✔ Real-time collaboration system
+✔ Full-level system logic
+✔ Documentation for running on Replit
+
+Make sure all code is clean, error-free, and ready to run on Replit.
+
+PROMPT END
+
+🎯 If you want next
+
+I can give you:
+
+✔ The actual backend code (server.js, routes, models)
+✔ The full Flutter pages code
+✔ The entire level system logic
+✔ Whiteboard implementation
+✔ Socket.io setup
+
+Just tell me:
+
+“Generate backend code”
+or
+“Generate full Flutter code”

@@ -1,0 +1,9 @@
+Initial data seeded successfully
+2:35:58 PM [express] serving on port 5000
+Server is now listening and ready for connections
+2:37:12 PM [express] POST /api/auth/register 201 in 5427ms :: {"id":"4775b5c5-c864-4ee5-853b-cfcdc21c99a7","firebaseUid":null,"email":"migration-check@example.com","displayName":"Migrator","passwordHash":"$2a$10$rYtjW4wmRKdSuh1He5SZTu99UV7rK.3j1xN3yyXZxCMpCYuJlQzaK","photoUrl":null,"role":"student","currentFloor":1,"lecturesCompleted":0,"xp":0,"level":1,"streak":0,"lastActiveDate":null,"battlesWon":0,"battlesLost":0,"createdAt":"2025-11-30T09:07:11.622Z"}
+2:48:21 PM [express] POST /api/auth/register 201 in 5630ms :: {"id":"1791e48b-e8b4-42a5-ba18-3f3504ebc9f4","firebaseUid":null,"email":"smoke+user@example.com","displayName":"SmokeUser","passwordHash":"$2a$10$Lg0KbdTzPtq88Hx48Ic14e9X6841A7MimCra4.6qKQFHKo00usXcu","photoUrl":null,"role":"student","currentFloor":1,"lecturesCompleted":0,"xp":0,"level":1,"streak":0,"lastActiveDate":null,"battlesWon":0,"battlesLost":0,"createdAt":"2025-11-30T09:18:20.670Z"}
+Login attempt: { email: 'smoke+user@example.com', passwordLength: 11 }
+User found, comparing password...
+Password valid: true
+2:48:21 PM [express] POST /api/auth/login 200 in 331ms :: {"id":"1791e48b-e8b4-42a5-ba18-3f3504ebc9f4","firebaseUid":null,"email":"smoke+user@example.com","displayName":"SmokeUser","passwordHash":"$2a$10$Lg0KbdTzPtq88Hx48Ic14e9X6841A7MimCra4.6qKQFHKo00usXcu","photoUrl":null,"role":"student","currentFloor":1,"lecturesCompleted":0,"xp":0,"level":1,"streak":0,"lastActiveDate":null,"battlesWon":0,"battlesLost":0,"createdAt":"2025-11-30T09:18:20.670Z"}

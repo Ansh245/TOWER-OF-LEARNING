@@ -1,0 +1,29 @@
+name: Migrate and Build
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  migrate-and-build:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Run DB migrations
+        run: npm run db:migrate
+      - name: Build
+        run: npm run build
+      - name: Start server for smoke tests
+        run: |
+          npm run start &
+          sleep 3
+      - name: Run smoke tests
+        run: npm run test:smoke

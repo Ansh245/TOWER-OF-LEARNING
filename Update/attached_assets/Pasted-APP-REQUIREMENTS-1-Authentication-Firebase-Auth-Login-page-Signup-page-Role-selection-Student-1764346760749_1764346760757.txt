@@ -1,0 +1,208 @@
+APP REQUIREMENTS
+1. Authentication (Firebase Auth)
+
+Login page
+
+Signup page
+
+Role selection (Student / Teacher)
+
+After login → navigate based on role
+
+2. Student Dashboard
+
+Display:
+
+XP progress bar
+
+Streak counter
+
+Level
+
+Buttons:
+
+“Start Today’s Lesson”
+
+“Join Collaboration Room”
+
+Attention score indicator
+
+Minimal clean UI with cards
+
+3. Lesson Module
+Lesson Page:
+
+Show lesson content (text, image, or video)
+
+“Continue to Quiz” button
+
+Quiz Page:
+
+MCQ format: question + 4 options
+
+Timer per question
+
+Submit button
+
+After Submit:
+
+Analyze score & response time
+
+Choose next difficulty: easy / medium / hard
+
+Show adaptive feedback popup using GPT API template
+
+4. Attention Detection Module (Frontend Only Simulation)
+
+Implement webcam/camera simulation using:
+
+Face detection
+
+Eye blink detection
+
+Head movement detection
+
+If low attention → trigger popup widget:
+“Low attention detected. Please refocus.”
+
+Use mediapipe or any open-source Flutter plugin for face detection.
+
+5. Collaboration Room (Socket.io)
+
+Create a real-time collaborative screen:
+
+Shared whiteboard
+
+Drawing
+
+Eraser
+
+Colors
+
+Real-time sync with Socket.io backend
+
+Chat sidebar with messages
+
+Group XP bar at bottom
+
+Use a Flutter canvas package for the board.
+
+6. Teacher Dashboard
+
+List of all students
+
+For each student:
+
+Average quiz score
+
+Average attention score
+
+Lessons completed
+
+Simple line/bar chart using fl_chart
+
+7. Data Models (Use Firebase Firestore)
+
+Users:
+
+id, name, email, role, xp, streak, level
+
+
+Lessons:
+
+id, title, content, difficulty, nextLessons: {easy, medium, hard}
+
+
+QuizResults:
+
+userId, lessonId, score, timeTaken, difficultyUsed, timestamp
+
+
+AttentionLogs:
+
+userId, timestamp, attentionScore
+
+
+GroupStats:
+
+roomId, members, totalXP, messagesSent, boardActions, updatedAt
+
+8. Technology Requirements
+
+Flutter 3+
+
+Firebase Authentication
+
+Firebase Firestore
+
+Socket.io
+
+Riverpod / Provider
+
+MVC or Clean Architecture
+
+Reusable widgets
+
+Light theme only
+
+Responsive for mobile + tablet
+
+9. Folder Structure
+lib/
+  main.dart
+  core/
+  features/
+    auth/
+    dashboard/
+    lessons/
+    quiz/
+    attention/
+    collab/
+    teacher/
+  widgets/
+  models/
+  services/
+  router/
+
+10. Deliverables
+
+Generate:
+
+All screens/widgets
+
+Navigation routes
+
+Basic UI for each page
+
+Sample lesson + sample quiz
+
+Socket.io integration scaffold
+
+Fake AI adaptive logic (rule-based)
+
+Fake attention detection simulation widget
+
+Firebase connection code
+
+Whiteboard implementation
+
+Teacher dashboard charts
+
+Make the entire app clean, modern, easy to extend, and production-ready.
+
+PROMPT END
+
+✅ Want Me to Generate the Entire Flutter App Code Too?
+
+If you want, I can:
+
+✔ Generate the complete Flutter folder structure
+✔ Generate actual code for each screen
+✔ Generate whiteboard code
+✔ Generate attention detection module
+✔ Generate Socket.io collab room code
+
+Just say:
+
+“Generate Flutter code” or
+“Start with Flutter page 1”
