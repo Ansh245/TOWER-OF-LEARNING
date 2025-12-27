@@ -4,8 +4,8 @@ import path from "path";
 
 export function serveStatic(app: Express) {
   // In ESM `__dirname` is not defined. Use `process.cwd()` to locate the
-  // server/public directory relative to the project root when running.
-  const distPath = path.resolve(process.cwd(), "server", "public");
+  // dist/public directory relative to the project root when running.
+  const distPath = path.resolve(process.cwd(), "dist", "public");
   if (!fs.existsSync(distPath)) {
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,
