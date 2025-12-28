@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Sparkles, Play, Heart, BookOpen, RefreshCw, ArrowLeft, CheckCircle, Clock, Target, Trophy, Brain, Zap, Star, Users, Award, TrendingUp, Lightbulb, CheckSquare, Bot, MessageCircle } from "lucide-react";
+import { Sparkles, Play, Heart, BookOpen, RefreshCw, ArrowLeft, CheckCircle, Clock, Target, Trophy, Brain, Zap, Star, Users, Award, TrendingUp, Lightbulb, CheckSquare, Bot, MessageCircle, PenTool } from "lucide-react";
 import { Link } from "wouter";
 import InteractiveVideoPlayer from "./InteractiveVideoPlayer";
 import HobbyBasedQuizGenerator from "./HobbyBasedQuizGenerator";
@@ -144,6 +144,9 @@ export default function PersonalizedLearning({
   const [useInteractivePredictor, setUseInteractivePredictor] = useState(false);
   const [predictedVideos, setPredictedVideos] = useState<LearningVideo[]>([]);
   const [showAIReadingCreator, setShowAIReadingCreator] = useState(false);
+  const [showContentCreator, setShowContentCreator] = useState(false);
+  const [contentCreatorVideo, setContentCreatorVideo] = useState<LearningVideo | null>(null);
+  const [createdContent, setCreatedContent] = useState<any>(null);
 
   // Comprehensive video database with mood-based content
   const mockVideos: LearningVideo[] = [
@@ -510,9 +513,15 @@ export default function PersonalizedLearning({
 
   const handleVideoComplete = (score: number, totalQuestions: number) => {
     setShowVideoPlayer(false);
-    setCurrentVideo(null);
+    // Don't set currentVideo to null yet - we need it for content creation
     // Could award XP or update progress here
     console.log(`Video completed! Score: ${score}/${totalQuestions}`);
+
+    // Start content creation phase
+    if (currentVideo) {
+      setContentCreatorVideo(currentVideo);
+      setShowContentCreator(true);
+    }
   };
 
   const handleTakeQuiz = (video: LearningVideo) => {
@@ -520,15 +529,138 @@ export default function PersonalizedLearning({
     setShowQuiz(true);
   };
 
+  const handleCreateContent = (video: LearningVideo) => {
+    setContentCreatorVideo(video);
+    setShowContentCreator(true);
+  };
+
   const handleQuizComplete = () => {
     setShowQuiz(false);
     setCurrentQuizVideo(null);
+  };
+
+  const handleContentCreationComplete = (content: any) => {
+    setCreatedContent(content);
+    setShowContentCreator(false);
+
+    // Now proceed to quiz
+    if (contentCreatorVideo) {
+      setCurrentQuizVideo(contentCreatorVideo);
+      setShowQuiz(true);
+    }
+
+    // Clean up
+    setContentCreatorVideo(null);
+    setCurrentVideo(null);
   };
 
   const handleContentPredicted = (videos: LearningVideo[], profile: any) => {
     setPredictedVideos(videos);
     setRecommendedVideos(videos);
   };
+
+  if (showContentCreator && contentCreatorVideo) {
+    return (
+      <div className="space-y-6">
+        {/* Back Button */}
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              setShowContentCreator(false);
+              setContentCreatorVideo(null);
+              setCurrentVideo(null);
+            }}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Videos
+          </Button>
+        </div>
+
+        {/* Content Creation Header */}
+        <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3 text-blue-600">
+              <PenTool className="h-6 w-6" />
+              Content Creation: Knowledge Assessment
+            </CardTitle>
+            <p className="text-muted-foreground">
+              🎬 Just watched: <strong>{contentCreatorVideo.title}</strong>
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Now create your own content script to prove what you've learned! This will help reinforce your understanding and serve as knowledge assessment.
+            </p>
+          </CardHeader>
+        </Card>
+
+        {/* Content Creation Instructions */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Target className="h-5 w-5 text-primary" />
+              Your Task: Create a Content Script
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">📝 Content Script Requirements:</h4>
+                <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                  <li>• Write a 2-3 minute script explaining the key concepts from the video</li>
+                  <li>• Include at least 3 main learning points</li>
+                  <li>• Use your own words to demonstrate understanding</li>
+                  <li>• Make it engaging and educational for others</li>
+                  <li>• Include examples or analogies if helpful</li>
+                </ul>
+              </div>
+
+              <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">🎯 Learning Goals:</h4>
+                <ul className="text-sm text-green-700 dark:text-green-300 space-y-1">
+                  <li>• Demonstrate understanding of the video content</li>
+                  <li>• Practice explaining complex concepts simply</li>
+                  <li>• Develop content creation skills</li>
+                  <li>• Reinforce learning through teaching</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* AI Content Creator */}
+        <AIReadingContentCreator
+          initialText={`Video Topic: ${contentCreatorVideo.title}\nSubject: ${contentCreatorVideo.subject}\nKey Learning Points: ${contentCreatorVideo.segments.map(s => s.title).join(', ')}\n\nCreate a content script explaining what you learned from this video.`}
+          onContentGenerated={handleContentCreationComplete}
+        />
+
+        {/* Skip Option */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  Not ready to create content yet? You can skip this step and go directly to the quiz.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowContentCreator(false);
+                  setCurrentQuizVideo(contentCreatorVideo);
+                  setShowQuiz(true);
+                  setContentCreatorVideo(null);
+                  setCurrentVideo(null);
+                }}
+              >
+                Skip to Quiz
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   if (showQuiz && currentQuizVideo) {
     return (
@@ -579,6 +711,7 @@ export default function PersonalizedLearning({
         onClose={() => {
           setShowVideoPlayer(false);
           setCurrentVideo(null);
+          // If user closes video player, they can still access content creation from the video card
         }}
       />
     );
@@ -981,6 +1114,13 @@ export default function PersonalizedLearning({
                   <div className="flex gap-3">
                     {watchedVideos.has(video.id) ? (
                       <>
+                        <Button
+                          onClick={() => handleCreateContent(video)}
+                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-base py-3 tower-glow"
+                        >
+                          <PenTool className="h-5 w-5 mr-2" />
+                          Create Content
+                        </Button>
                         <Button
                           onClick={() => handleTakeQuiz(video)}
                           className="flex-1 bg-accent hover:bg-accent/90 text-base py-3 tower-glow"
